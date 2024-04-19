@@ -1,0 +1,51 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Containers
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Container name</th>
+                <th class="text-start">Container sid</th>
+                <th class="text-start">Container status</th>
+                <th class="text-start">Image tag</th>
+                <th class="text-start">Image sid</th>
+                <th class="text-start">Action</th>
+            </tr>
+        </thead>
+       <tbody>
+            {% for container_list in containers_list %}
+            <tr>
+                <td class="text-start">{{ container_list["name"] }}</td>
+                <td class="text-start">{{ container_list["sid"] }}</td>
+                <td class="text-start">{{ container_list["status"] }}</td>
+                <td class="text-start">{{ container_list["image_name"] }}</td>
+                <td class="text-start">{{ container_list["image_sid"] }}</td>
+                <td class="border-0 text-end">
+                    <form action="/containers" method="POST" >
+                        <button class="btn btn-primary" type="submit" name="action" value="stop_{{ container_list.sid }}">Stop</button>
+                        <button class="btn btn-primary" type="submit" name="action" value="start_{{ container_list.sid }}">Start</button>
+                        <button class="btn btn-primary" type="submit" name="action" value="remove_{{ container_list.sid }}">Remove</button>
+                        <button class="btn btn-primary" type="submit" name="action" value="attach_{{ container_list.sid }}">Attach</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 text-end">
+                    <form action="/create_container" method="GET" >
+                    <button class="btn btn-primary" type="submit">
+                        Create Container
+                    </button>
+                    </form>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}

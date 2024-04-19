@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th class="text-start">Image tag</th>
+                <th class="text-start">Image sid</th>
+                <th class="text-end">Action</th>
+            </tr>
+        </thead>
+       <tbody>
+            {% for image_list in images_list %}
+            <tr>
+                <td class="text-start">{{ image_list["tag"] }}</td>
+                <td class="text-start">{{ image_list["image_sid"] }}</td>
+                <td class="border-0 text-end"><button class="btn btn-primary" type="submit" href="/image_del">Remove</button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="border-0 text-end"><button class="btn btn-primary" type="submit" href="/image_add">ADD Image</button></td>
+            </tr>
+        </tfoot>
+    </table>
+
+{% endblock %}
